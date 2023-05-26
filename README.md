@@ -67,7 +67,7 @@ Then export the getter from the module context.
 </ul>
 ```
 
-Once that's done create your children component(s).
+Once that's done create your child component.
 
 ```svelte
 <script lang="ts">
