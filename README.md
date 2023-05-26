@@ -2,26 +2,6 @@
 
 Svelte Context Deeznuts is a very advanced 58 line library that solves a problem that's already been solved by the svelte standard library.
 
-## Why ?
-
-It is often the case that we need to provide some type hinting for component contexts.
-
-Unfortunately `getContext` does not inherit type hints from `setContext` and there is probably no easy way to fix that in the standard library without adding unnecessary complexity to the context api; and I like my standard libraries to be simple.
-
-Some workarounds include creating separate files to define the typed contexts and importing them separately.
-
-I don't like that, all `component.svelte`'s affairs should remain in the `component.svelte` file.
-
-## When to use
-
-Make sure you actually need to use the context api.
-
-This library automatically converts your value into a `Writable<T>`.
-
-Chances are that if you don't need a `Writable` in your context, you probably don't need the context api itself.
-
-We may agree to disagree.
-
 ## How to use
 
 Install with
@@ -94,3 +74,23 @@ And to put things together:
     <Item>item 4</Item>
 </List>
 ```
+
+## Why ?
+
+It is often the case that we need to provide some type hinting for component contexts.
+
+Unfortunately `getContext` does not inherit type hints from `setContext` and there is probably no easy way to fix that in the standard library without adding unnecessary complexity to the context api; and I like my standard libraries to be simple.
+
+Some workarounds include creating separate files to define the typed contexts and importing them separately.
+
+I don't like that, all `component.svelte`'s affairs should remain in the `component.svelte` file.
+
+## When to use
+
+Make sure you actually need to use the context api.
+
+This library automatically converts your value into a `Writable<T>`.
+
+Chances are that if you don't need a `Writable` in your context, you probably don't need the context api itself.
+
+We may agree to disagree.
