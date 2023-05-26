@@ -5,7 +5,7 @@
 
 Svelte Context Deeznuts is a very advanced 58 line library that solves a problem that's already been solved by the svelte standard library.
 
-## Why ?
+## Why?
 
 It is often the case that we need to provide some type hinting for component contexts.
 
