@@ -1,58 +1,96 @@
-# create-svelte
+# Introduction
 
-Everything you need to build a Svelte library, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+Svelte Context Deeznuts is a very advanced 58 line library that solves a problem that's already been solved by the svelte standard library.
 
-Read more about creating a library [in the docs](https://kit.svelte.dev/docs/packaging).
+## Why ?
 
-## Creating a project
+It is often the case that I need to provide some type hinting for component contexts.
 
-If you're seeing this, you've probably already done this step. Congrats!
+Unfortunately `getContext` does not inherit type hints from `setContext` and there is probably no easy way to fix that in the standard library without adding unnecessary complexity to the context api; and I like my standard libraries to be simple.
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+Some workarounds include creating separate files to define the typed contexts and importing them separately.
 
-# create a new project in my-app
-npm create svelte@latest my-app
+I don't like that, all `component.svelte`'s' affairs should remain in the `component.svelte` file.
+
+## When to use
+
+Make sure you actually need to use the context api.
+
+This library automatically converts your value into a `Writable<T>`.
+
+Chances are that if you don't need a `Writable` in your context, you probably don't need the context api itself.
+
+We may agree to disagree.
+
+## How to use
+
+Install with
+
+```sh
+npm i -D svelte-context-deeznuts
 ```
 
-## Developing
+Create you parent component and set a context.
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+```svelte
+<!-- List.svelte -->
+<script lang="ts">
+    import { set } from 'svelte-context-deeznuts'
+    set<false|string>('activeID', false)
+</script>
+<ul>
+    <slot/>
+</ul>
 ```
 
-Everything inside `src/lib` is part of your library, everything inside `src/routes` can be used as a showcase or preview app.
+This will create your context.
 
-## Building
+Then export the getter from the module context.
 
-To build your library:
-
-```bash
-npm run package
+```svelte
+<!-- List.svelte -->
+<script lang="ts" context="module">
+    import { get } from 'svelte-context-deeznuts'
+    export const getActiveID = get<false|string>('active')
+</script>
+<script lang="ts">
+    import { set } from 'svelte-context-deeznuts'
+    set<false|string>('activeID', false)
+</script>
+<ul>
+    <slot/>
+</ul>
 ```
 
-To create a production version of your showcase app:
-
-```bash
-npm run build
+Once that's done create your children component(s).
+```svelte
+<script lang="ts">
+    import { getActiveID } from './List.svelte'
+    const activeID = getActiveID()
+    const id = crypto.randomUUID()
+</script>
+<li on:click={()=>$activeID = id}>
+    <span>
+        <slot/>
+    </span>
+    {#if id === $activeID}
+        <span>(active)</span>
+    {/if}
+</li>
 ```
 
-You can preview the production build with `npm run preview`.
+And to put things together:
+```svelte
+<!-- App.svelte -->
+<script lang="ts">
+    import List from './list.svelte'
+    import Item from './item.svelte'
+</script>
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
-
-## Publishing
-
-Go into the `package.json` and give your package the desired name through the `"name"` option. Also consider adding a `"license"` field and point it to a `LICENSE` file which you can create from a template (one popular option is the [MIT license](https://opensource.org/license/mit/)).
-
-To publish your library to [npm](https://www.npmjs.com):
-
-```bash
-npm publish
+<List>
+    <Item>item 1</Item>
+    <Item>item 2</Item>
+    <Item>item 3</Item>
+    <Item>item 4</Item>
+</List>
 ```
