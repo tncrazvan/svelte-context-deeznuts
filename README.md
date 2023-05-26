@@ -4,13 +4,13 @@ Svelte Context Deeznuts is a very advanced 58 line library that solves a problem
 
 ## Why ?
 
-It is often the case that I need to provide some type hinting for component contexts.
+It is often the case that we need to provide some type hinting for component contexts.
 
 Unfortunately `getContext` does not inherit type hints from `setContext` and there is probably no easy way to fix that in the standard library without adding unnecessary complexity to the context api; and I like my standard libraries to be simple.
 
 Some workarounds include creating separate files to define the typed contexts and importing them separately.
 
-I don't like that, all `component.svelte`'s' affairs should remain in the `component.svelte` file.
+I don't like that, all `component.svelte`'s affairs should remain in the `component.svelte` file.
 
 ## When to use
 
