@@ -1,5 +1,4 @@
-
-![deeznuts](./deeznuts.jpg "deeznuts")
+![deeznuts](./deeznuts.jpg 'deeznuts')
 
 # Introduction
 
