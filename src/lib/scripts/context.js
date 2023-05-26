@@ -1,5 +1,5 @@
-import { getContext, setContext } from 'svelte';
-import { writable } from 'svelte/store';
+import { getContext, setContext } from 'svelte'
+import { writable } from 'svelte/store'
 
 /**
  * Wraps `value` in a `Writable<T>` store and sets the `name` context.
@@ -22,7 +22,7 @@ import { writable } from 'svelte/store';
  * @returns {import('svelte/store').Writable<T>} store of the context.
  */
 export function set(name, value) {
-	return setContext(name, writable(value));
+  return setContext(name, writable(value))
 }
 
 /**
@@ -53,5 +53,5 @@ export function set(name, value) {
  * @returns {function():import('svelte/store').Writable<T>} store of the context.
  */
 export function get(name) {
-	return () => getContext(name);
+  return () => getContext(name)
 }
