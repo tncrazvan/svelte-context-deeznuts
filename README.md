@@ -1,4 +1,4 @@
-![deeznuts](./deeznuts.jpg 'deeznuts')
+![deeznuts](https://github.com/tncrazvan/svelte-context-deeznuts/blob/example/deeznuts.jpg?raw=true 'deeznuts')
 
 # Introduction
 
